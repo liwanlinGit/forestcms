@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cms.forest</groupId>
+    <artifactId>forestcms</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <groupId>cms.forest</groupId>
+  <artifactId>forestcms-gateway</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>forestcms-gateway</name>
+  <url>http://maven.apache.org</url>
+ 
+ 
+ 
+ 
+ 
+ 
+  <dependencies>
+  <dependency>
+	  <groupId>cms.forest.common</groupId>
+	  <artifactId>forestcms-common-redis</artifactId>
+	  <version>0.0.1-SNAPSHOT</version>
+	  </dependency>
+   <dependency>
+          <groupId>cms.forest.common.core</groupId>
+		  <artifactId>forestcms-common-core</artifactId>
+		  <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    <dependency>
+	  <groupId>com.alibaba.cloud</groupId>
+	  <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+	</dependency>
+	<dependency>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+    </dependency>
+    
+    <dependency>
+	  <groupId>org.springframework.cloud</groupId>
+	  <artifactId>spring-cloud-starter-gateway</artifactId>
+	  <exclusions>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </exclusion>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </exclusion>
+      </exclusions>
+    
+	</dependency>
+	<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+   <dependency>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-configuration-processor</artifactId>
+   </dependency>
+   
+   <dependency>
+       <groupId>org.springframework.security</groupId>
+       <artifactId>spring-security-config</artifactId>
+   </dependency>
+   <dependency>
+       <groupId>org.springframework.security</groupId>
+       <artifactId>spring-security-oauth2-resource-server</artifactId>
+   </dependency>
+   <dependency>
+       <groupId>org.springframework.security</groupId>
+       <artifactId>spring-security-oauth2-client</artifactId>
+   </dependency>
+   <dependency>
+       <groupId>org.springframework.security</groupId>
+       <artifactId>spring-security-oauth2-jose</artifactId>
+   </dependency>
+   <dependency>
+       <groupId>com.nimbusds</groupId>
+       <artifactId>nimbus-jose-jwt</artifactId>
+       <version>8.16</version>
+   </dependency>
+   <dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+	</dependency>
+	
+  </dependencies>
+   
+  <dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Hoxton.SR3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.cloud</groupId>
+				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
+				<version>2.2.0.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+		
+	</dependencyManagement>
+	<build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                  <mainClass>org.forestcms.ApplicationGateway</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

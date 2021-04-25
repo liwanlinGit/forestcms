@@ -1,0 +1,45 @@
+server:
+  port: 7004
+spring:
+  application:
+    name: forestcms-job-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
+ 
+
+xxl:
+  job:
+    admin:
+      addresses: http://localhost:7003
+    accessToken: 
+    executor:
+      appname: xxl-job-clien
+      address: 
+      ip: 
+      port: 1234
+      logpath: /Users/liwanlin/logs/xxl-job/jobhandler
+      logretentiondays: 30
+
+
+
+
+
+
+
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.forestcms.system.mapper.SysUserMapper">
+   
+   
+   <select id="getUserByOrgId" parameterType="Map" resultType="org.forestcms.system.entity.SysUser">
+      SELECT
+		s.login_name as loginName,
+		s.create_time as createTime,
+		s.is_status as isStatus,
+		s.name,
+		s.login_time as loginTime,
+		s.phone,
+		s.email,
+		s.ip,
+		s.id
+	FROM
+		sys_user s
+		INNER JOIN user_org u ON u.user_id = s.id
+	where u.org_id=#{orgId} and s.is_delete=0
+	<if test="name!=null and name!=''">
+	    and s.name like CONCAT('%',#{name},'%') 
+	</if>
+   </select>
+</mapper>

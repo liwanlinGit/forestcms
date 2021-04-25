@@ -1,0 +1,50 @@
+server:
+  port: 7777
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: 'http://localhost:7002/rsa/publicKey' #配置RSA的公钥访问地址
+  application:
+    name: forestcms-gateway
+  redis:
+    database: 0
+    host: localhost
+    password: forest
+    port: 6379
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: system-forestcms
+          uri: lb://forestcms-system
+          predicates:
+            - Path=/forestcms-system/**
+          filters:
+            - StripPrefix=1
+            
+        - id: auth-forestcms
+          uri: lb://forestcms-auth
+          predicates:
+            - Path=/forestcms-auth/**
+          filters:
+            - StripPrefix=1
+            
+      
+ ##接口白名单不校验权限
+whitelist:
+  urls:
+      - /forestcms-auth/oauth/token
+      - /forestcms-system/sys/permission/getPermissionsByUserId
+      - /forestcms-auth/oauth/user
+      - /forestcms-system/sys/permission/button
+   

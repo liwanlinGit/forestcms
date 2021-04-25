@@ -1,0 +1,15 @@
+server:
+  port: 7002
+spring:
+  application:
+    name: forestcms-auth
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848  
+  redis:
+    database: 0
+    host: localhost
+    password: forest
+    port: 6379
+   

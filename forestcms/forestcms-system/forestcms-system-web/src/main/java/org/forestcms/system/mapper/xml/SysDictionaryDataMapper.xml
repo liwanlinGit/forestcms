@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.forestcms.system.mapper.SysDictionaryDataMapper">
+
+
+  <select id="selectData" parameterType="Map" resultType="org.forestcms.system.entity.SysDictionaryData">
+  
+	    SELECT
+		d.CODE,
+		d.NAME 
+	FROM
+		sys_dictionary_type t
+		INNER JOIN sys_dictionary_data d ON t.id = d.type
+		where d.is_delete=0 
+		<if test="typeCode!=null and typeCode!=''">
+		 and t.`code`=#{typeCode}
+		</if>
+		<if test="dataCode!=null and dataCode!=''">
+		 and d.`code`=#{dataCode}
+		</if>
+		 order by d.id desc
+  </select>
+
+</mapper>

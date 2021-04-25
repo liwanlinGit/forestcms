@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.forestcms.system.mapper.SysPermissionsMapper">
+
+
+
+	<select id="getPermissionByRoleId" parameterType="Map" resultType="org.forestcms.system.entity.SysPermissions">
+	  SELECT
+		sp.name,
+		sp.id,
+		sp.parent_id AS parentId,
+		sp.is_parent AS isParent,
+		( SELECT count( * ) FROM sys_role_permissions srp WHERE srp.role_id = #{roleId} AND srp.permissions_id = sp.id ) AS checked 
+		FROM
+			sys_permissions sp 
+	    where sp.is_delete=0 
+		ORDER BY
+			sp.tree_depth,
+			sp.priority
+		
+	</select>
+	
+	
+	<select id="getPermissionByUserId" parameterType="Long" resultType="org.forestcms.system.entity.SysPermissions">
+		SELECT
+			sp.id,
+			sp.name,
+			sp.parent_id AS parentId,
+			sp.is_parent AS isParent,
+			sp.url,
+			sp.icon_name AS iconName,
+			sp.tree_depth AS treeDepth,
+			sp.type
+		FROM
+			sys_user_role sur
+			LEFT JOIN sys_role_permissions srp ON sur.role_id = srp.role_id
+			INNER JOIN sys_permissions sp ON srp.permissions_id = sp.id
+		WHERE
+			sur.user_id = #{userId}
+			AND sp.is_delete = 0 and sp.type=0
+		GROUP BY
+			sp.id,
+			sp.NAME,
+			sp.parent_id,
+			sp.is_parent,
+			sp.url,
+			sp.icon_name,
+			sp.tree_depth
+		ORDER BY
+			sp.tree_depth,
+			sp.priority
+	</select>
+
+
+	<select id="getRoleButton" parameterType="Map" resultType="org.forestcms.system.entity.SysPermissions">
+	
+	   SELECT
+			sp.id,
+			sp.name,
+			sp.parent_id AS parentId,
+			sp.is_parent AS isParent,
+			sp.url,
+			sp.icon_name AS iconName,
+			sp.tree_depth AS treeDepth,
+			sp.type,
+			sp.url_type
+		FROM
+			sys_user_role sur
+			inner JOIN sys_role_permissions srp ON sur.role_id = srp.role_id
+			INNER JOIN sys_permissions sp ON srp.permissions_id = sp.id
+		WHERE
+			sur.user_id = ${userId}
+			AND sp.is_delete = 0 and sp.type=1 and parent_id=#{parentId}
+		GROUP BY
+			sp.id,
+			sp.NAME,
+			sp.parent_id,
+			sp.is_parent,
+			sp.url,
+			sp.icon_name,
+			sp.tree_depth
+		ORDER BY
+			sp.tree_depth,
+			sp.priority
+	</select>
+	<select id="getPermissionUrlByRoleCode" parameterType="Map" resultType="org.forestcms.system.entity.SysPermissions">
+		SELECT
+			sp.url,
+			GROUP_CONCAT( DISTINCT sr.role_code ) as roleCode 
+		FROM
+			sys_role sr
+			INNER JOIN sys_role_permissions srp ON sr.id = srp.role_id
+			INNER JOIN sys_permissions sp ON sp.id = srp.permissions_id 
+		WHERE
+			sp.type IN ( 1, 2, 3 ) 
+			<if test="roleCodeList!=null and roleCodeList.size>0">
+				AND sr.role_code IN
+				<foreach collection="roleCodeList" open="(" close=")" separator=","  item="item">
+					#{item}
+				</foreach>
+			</if>
+		GROUP BY
+			sp.url
+	  
+	</select>
+</mapper>
