@@ -88,7 +88,7 @@ public class SysPermissionsController {
 	}
 
 	@RequestMapping("/getById")
-	public CommonResult save(Long id) {
+	public CommonResult getById(Long id) {
 		return CommonResult.success(sysPermissionsService.getById(id));
 	}
 	

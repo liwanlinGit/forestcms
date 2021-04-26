@@ -1,0 +1,59 @@
+package ${package}.${moduleName}.controller;
+
+import java.util.Arrays;
+import java.util.Map;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.${moduleName}.service.${className}Service;
+import java.util.List;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Api(tags = "${moduleName}")
+@RestController
+@RequestMapping("${moduleName}/${pathName}")
+public class ${className}Controller {
+
+    @Autowired
+    private ${className}Service ${classname}Service;
+
+    @ApiOperation(value = "新增")
+    @PostMapping(value = "insert")
+    public Object insert(${className}Entity ${classname}){
+        return ${classname}Service.insert(${classname});
+    }
+
+    @ApiOperation(value = "删除")
+    @GetMapping(value = "delete")
+    public int deleteByPrimaryKey($pk.attrType key) {
+        return ${classname}Service.deleteByPrimaryKey(key);
+    }
+
+    @ApiOperation(value = "根据主键更新")
+    @PostMapping(value = "updateByPrimaryKey")
+    public int updateByPrimaryKey(${className}Entity ${classname}) {
+        return ${classname}Service.updateByPrimaryKey(${classname});
+    }
+
+    @ApiOperation(value = "根据主键查询")
+    @GetMapping(value = "selectByPrimaryKey")
+    public ${className}Entity selectByPrimaryKey($pk.attrType key) {
+        return ${classname}Service.selectByPrimaryKey(key);
+    }
+
+    @ApiOperation(value = "条件查询")
+    @GetMapping(value = "select")
+    public List<${className}Entity> select(${className}Entity ${classname}) {
+        return ${classname}Service.select(${classname});
+    }
+}

@@ -34,9 +34,9 @@
                 </el-table-column>
                 <el-table-column prop="loginTime" label="登录时间"  align="center" width="130"></el-table-column>
                 <el-table-column prop="ip" label="登录ip"  align="center" ></el-table-column>
-                <el-table-column label="操作" width="" align="center"  v-if="button_role&&(button_role.delete||button_role.edit||button_role.look)">
+                <el-table-column label="操作" width="" align="center"  v-if="button_role&&(button_role.delete||button_role.edit||button_role.look||button_role.setting)">
                     <template slot-scope="scope">
-                        <el-button type="text" icon="el-icon-setting" @click="ztreeEdit(scope.$index, scope.row)">设置角色</el-button>
+                        <el-button type="text" icon="el-icon-setting" v-if="button_role&&button_role.setting" @click="ztreeEdit(scope.$index, scope.row)">设置角色</el-button>
                         <el-button type="text" icon="el-icon-edit"  v-if="button_role&&button_role.edit" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                         <el-button type="text" icon="el-icon-delete" class="red"  v-if="button_role&&button_role.delete"   @click="handleDelete(scope.$index, scope.row)" >删除</el-button>
                         <el-button type="text" icon="el-icon-document"  v-if="button_role&&button_role.look" @click="handleLook(scope.$index, scope.row)">查看</el-button>

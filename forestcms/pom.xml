@@ -26,6 +26,7 @@
   	<module>forestcms-common</module>
     <module>forestcms-auth</module>
     <module>forestcms-job</module>
+    <module>forestcms-generator</module>
   </modules>
   
   <dependencies>

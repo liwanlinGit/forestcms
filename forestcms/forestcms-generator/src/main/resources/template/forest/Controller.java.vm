@@ -1,0 +1,62 @@
+package ${package}.controller;
+
+import org.forestcms.common.core.result.CommonResult;
+import ${package}.service.${className}Service;
+import ${package}.entity.${className};
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import javax.servlet.http.HttpServletRequest;
+
+import java.util.Map;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ *
+ */
+@RestController
+@RequestMapping("/${classname}")
+public class ${className}Controller {
+
+    @Autowired
+    private ${className}Service ${classname}Service;
+ 
+	@RequestMapping(value = "/list")
+    public CommonResult list(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
+        Page<${className}> ipage = new Page<${className}>(page, pageSize);
+		QueryWrapper<${className}> wrapper = new QueryWrapper<${className}>();
+		
+		IPage<${className}> selectPage = ${classname}Service.page(ipage, wrapper);
+        return CommonResult.success(selectPage);
+    }
+
+    @RequestMapping(value = "/getById")
+    public CommonResult getById(Long id) {
+        return CommonResult.success(${classname}Service.getById(id));
+    }
+
+    @RequestMapping(value = "/save")
+    public CommonResult save(HttpServletRequest request,${className} ${classname}) {
+        return CommonResult.success(${classname}Service.save(${classname}));
+    }
+
+    @RequestMapping(value = "/update")
+    public CommonResult update(HttpServletRequest request,${className} ${classname}) {
+        return CommonResult.success(${classname}Service.updateById(${classname}));
+    }
+
+    @RequestMapping(value = "/delete")
+    public CommonResult delete(Long id) {
+        return CommonResult.success(${classname}Service.removeById(id));
+    }
+}

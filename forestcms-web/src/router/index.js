@@ -111,6 +111,13 @@ export default new Router({
                 },
 
                 {
+                    path: '/generator',
+                    component: resolve => require(['../components/page/system/generator/generator.vue'], resolve),
+                    meta: { title: '代码生成器' }
+                    
+                },
+
+                {
                     path: '/404',
                     component: resolve => require(['../components/page/404.vue'], resolve),
                     meta: { title: '404' }

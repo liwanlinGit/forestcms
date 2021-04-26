@@ -1,0 +1,52 @@
+package ${package}.entity;
+
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serializable;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@TableName(value = "${tableName}")
+public class ${className} implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	#foreach ($column in $columns)
+	
+    /**
+	* $column.comments
+	*/
+	@TableField(value = "$column.columnName")
+    private $column.attrType $column.attrname;
+	#end
+	
+    #foreach ($column in $columns)
+    
+    /**
+        * $column.comments
+        */
+    public void set${column.attrName}(${column.attrType} ${column.attrname}){
+      this.${column.attrname}=${column.attrname};
+    }
+    /**
+        * $column.comments
+        */
+    public $column.attrType get${column.attrName}(){
+       return ${column.attrname};
+    }
+    #end
+    
+    
+    
+
+
+}

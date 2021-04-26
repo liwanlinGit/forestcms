@@ -1,10 +1,9 @@
 package org.forestcms.auth.services;
 
 
-import org.apache.tomcat.util.buf.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.forestcms.auth.dto.User;
 import org.forestcms.common.core.dto.UserDTO;
-import org.forestcms.common.core.result.CommonResult;
 import org.forestcms.system.api.UsersFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -64,8 +63,7 @@ public class UserServiceImpl implements UserDetailsService {
         } else if (!securityUser.isCredentialsNonExpired()) {
             throw new CredentialsExpiredException("该账户的登录凭证已过期，请重新登录!");
         }
-    
-        Map<String, String> roleUrl = usersFeignService.getPermissionUrlByRoleCode(StringUtils.join(userDto.getRoles()));
+        Map<String, String> roleUrl = usersFeignService.getPermissionUrlByRoleCode(StringUtils.join(userDto.getRoles().toArray()));
         redisTemplate.delete("AUTH:RESOURCE_ROLES_MAP:"+userDto.getId());
         redisTemplate.opsForHash().putAll("AUTH:RESOURCE_ROLES_MAP:"+userDto.getId(), roleUrl);
         return securityUser;

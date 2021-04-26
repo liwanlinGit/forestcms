@@ -1,0 +1,42 @@
+package ${package}.${moduleName}.service;
+
+import ${package}.${moduleName}.repository.${className}Dao;
+import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.${moduleName}.service.${className}Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+
+/**
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${className}Service {
+
+    @Autowired
+    private ${className}Dao ${classname}Dao;
+
+    public Object insert(${className}Entity ${classname}){
+        return ${classname}Dao.insert(${classname});
+    }
+
+    public int deleteByPrimaryKey($pk.attrType key) {
+        return ${classname}Dao.deleteByPrimaryKey(key);
+    }
+
+    public int updateByPrimaryKey(${className}Entity ${classname}) {
+        return ${classname}Dao.updateByPrimaryKey(${classname});
+    }
+
+    public ${className}Entity selectByPrimaryKey($pk.attrType key) {
+        return ${classname}Dao.selectByPrimaryKey(key);
+    }
+
+    public List<${className}Entity> select(${className}Entity ${classname}) {
+        return ${classname}Dao.select(${classname});
+    }
+}

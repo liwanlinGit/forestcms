@@ -1,0 +1,19 @@
+package ${package}.${moduleName}.dao;
+
+import ${package}.${moduleName}.entity.${className}Entity;
+import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.common.Mapper;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ *
+ * 接口用法大全。
+ * https://mapperhelper.github.io/all/
+ */
+@Repository
+public interface ${className}Dao extends Mapper<${className}Entity> {
+	
+}

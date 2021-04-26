@@ -1,0 +1,19 @@
+package ${package}.service;
+
+import cn.forest.common.util.ResultMessage;
+import cn.forest.common.util.StringUtil;
+import ${package}.entity.${className};
+
+import com.baomidou.mybatisplus.extension.service.IService;
+
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ *
+ */
+public class ${className}Service extends IService<${className}>{
+	
+}

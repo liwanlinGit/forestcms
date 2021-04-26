@@ -41,7 +41,7 @@ public class SysExceptionLogsController {
 	}
 	
 	@RequestMapping("getById")
-	public CommonResult add(Long id) {
+	public CommonResult getById(Long id) {
 		
 		return CommonResult.success(sysExceptionLogsService.getById(id));
 	}

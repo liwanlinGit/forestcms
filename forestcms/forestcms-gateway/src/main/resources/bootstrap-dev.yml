@@ -39,6 +39,20 @@ spring:
           filters:
             - StripPrefix=1
             
+        - id: job-admin-forestcms
+          uri: lb://forestcms-job-admin
+          predicates:
+            - Path=/forestcms-job-admin/**
+          filters:
+            - StripPrefix=1
+            
+        - id: generator-forestcms
+          uri: lb://forestcms-generator
+          predicates:
+            - Path=/forestcms-generator/**
+          filters:
+            - StripPrefix=1
+            
       
  ##接口白名单不校验权限
 whitelist:
@@ -47,4 +61,5 @@ whitelist:
       - /forestcms-system/sys/permission/getPermissionsByUserId
       - /forestcms-auth/oauth/user
       - /forestcms-system/sys/permission/button
+      - /forestcms-auth/oauth/loginOut
    

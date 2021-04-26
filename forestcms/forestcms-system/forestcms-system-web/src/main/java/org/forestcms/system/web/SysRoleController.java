@@ -45,7 +45,7 @@ public class SysRoleController {
 
 	@RequestMapping(value = "/add")
 	@SysLogs(desc = "添加角色")
-	public CommonResult getList(SysRole sysRole) {
+	public CommonResult add(SysRole sysRole) {
 		boolean save = sysRoleService.save(sysRole);
 		if (save) {
 			return CommonResult.success();
@@ -54,7 +54,7 @@ public class SysRoleController {
 	}
 
 	@RequestMapping(value = "/getById")
-	public CommonResult getList(Long id) {
+	public CommonResult getById(Long id) {
 
 		return CommonResult.success(sysRoleService.getById(id));
 	}

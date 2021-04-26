@@ -1,0 +1,14 @@
+package ${package}.${moduleName}.mapper;
+
+import ${package}.${moduleName}.entity.${className};
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ *
+ */
+public interface ${className}Mapper extends BaseMapper<${className}> {
+	
+}

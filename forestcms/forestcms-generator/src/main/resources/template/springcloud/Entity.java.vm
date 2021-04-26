@@ -1,0 +1,56 @@
+package ${package}.${moduleName}.entity;
+
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+import java.io.Serializable;
+import java.util.Date;
+import lombok.Data;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Table(name = "${tableName}")
+@ApiModel(value = "${className}",description = "${comments}")
+public class ${className} implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	#foreach ($column in $columns)
+    /**
+	* $column.comments
+	*/
+	@ApiModelProperty(value = "$column.comments")
+	#if($column.columnName == $pk.columnName)
+    @Id
+	#end
+    private $column.attrType $column.attrname;
+	#end
+    #foreach ($column in $columns)
+    
+    /**
+    * $column.comments
+    */
+    public $column.attrType set${column.attrName}(${column.attrType} ${column.attrname}){
+      this.${column.attrname}=${column.attrname};
+    }
+    /**
+    * $column.comments
+    */
+    public void get${column.attrName}(){
+       return ${column.attrname};
+    }
+    #end
+    
+    
+    
+
+
+}
